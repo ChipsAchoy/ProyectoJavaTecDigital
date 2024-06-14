@@ -844,7 +844,9 @@ public class GUI extends javax.swing.JFrame {
         //revisar que el codigo sea de 2 letras
         }else if(CodigoField.getText().length() != 2){
             javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser de 2 caracteres", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
-
+        //revisar que el codigo sea solo letras
+        }else if(!CodigoField.getText().matches("[a-zA-Z]+")){
+            javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser solo letras", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }else{
             //Crear una nueva escuela
             escuelaController.addEscuelaArea(new EscuelaArea(NombreField.getText(), CodigoField.getText()));
@@ -892,6 +894,10 @@ public class GUI extends javax.swing.JFrame {
         //check codigo es de 6 caracteres y es unico
         else if(RegCursoCodField.getText().length() != 4){
             javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser de 4 caracteres", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //revisar que el codigo sea solo numeros
+        else if(!RegCursoCodField.getText().matches("[0-9]+")){
+            javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser solo numeros", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
         else if(cursoController.getCursos().stream().anyMatch((curso) -> Integer.toString(curso.getCode()).equals(RegCursoCodField.getText()))){
             javax.swing.JOptionPane.showMessageDialog(this, "Ya existe un curso con ese codigo", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -944,6 +950,7 @@ public class GUI extends javax.swing.JFrame {
         
 
         cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).addCorrequisito(cursocorr);
+        javax.swing.JOptionPane.showMessageDialog(this, "Correquisito registrado con exito");
 
     }//GEN-LAST:event_RegCorrbuttonActionPerformed
 
@@ -958,6 +965,7 @@ public class GUI extends javax.swing.JFrame {
         
 
         cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).addRequisito(cursoReq);
+        javax.swing.JOptionPane.showMessageDialog(this, "Requisito registrado con exito");
 
     }//GEN-LAST:event_RegReqbuttonActionPerformed
 
@@ -985,13 +993,17 @@ public class GUI extends javax.swing.JFrame {
         else if(cursoController.getCursos().stream().noneMatch((curso) -> (curso.getEscArea().getCode()+curso.getCode()).equals(PlanCursoField.getText()))){
             javax.swing.JOptionPane.showMessageDialog(this, "No existe un curso con ese codigo", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
-        //revisar que no se reptira curso en bloque
-        else if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCursos().stream().anyMatch((curso) -> curso.getEscArea().getCode()+curso.getCode() == PlanCursoField.getText()))){
+        //-------revisar que no se reptira curso en bloque
+        else if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCursos().stream().anyMatch((curso) -> (curso.getEscArea().getCode()+curso.getCode()).equals(PlanCursoField.getText())))){
             javax.swing.JOptionPane.showMessageDialog(this, "No se puede repetir un curso en un bloque", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
-        //codigo de plan debe ser 4 caracteres
+        //codigo de plan debe ser 4 numeros
         else if(PlanCodigoField.getText().length() != 4){
-            javax.swing.JOptionPane.showMessageDialog(this, "El código del plan debe ser de 4 caracteres", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser de 4 números", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //revisar que el codigo sea solo numeros
+        else if(!PlanCodigoField.getText().matches("[0-9]+")){
+            javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser solo numeros", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
         else{
             //Crear un nuevo plan de estudio
