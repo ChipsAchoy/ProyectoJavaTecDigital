@@ -77,6 +77,7 @@ public class PlanEstudios {
     public Map<String, List<Curso>> getBloqueCursos() {
         return bloqueCursos;
     }
+    
 
     // Asociar un curso a un bloque
     public void asociarCursoABloque(Curso curso, String bloque) {
