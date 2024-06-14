@@ -1286,7 +1286,7 @@ public class GUI extends javax.swing.JFrame {
     public EscuelaAreaController escuelaController = new EscuelaAreaController();
     public CursoController cursoController = new CursoController();
     public PlanEstudiosController planEstudioController = new PlanEstudiosController();
-    String path = "C:/Users/david/OneDrive/Documents/PROGRA/ProyectoJavaTecDigital/ProyectoMatricula/PDFs/";
+    String path = "PDFs/";
     
     
     /**

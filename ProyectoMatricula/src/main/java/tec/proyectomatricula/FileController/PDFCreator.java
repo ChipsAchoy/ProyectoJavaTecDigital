@@ -4,7 +4,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 
 import java.io.File;
@@ -21,86 +20,120 @@ public class PDFCreator {
 
     public void createPDF(String dest, PlanEstudios planEstudios) {
 
-        
         try (PDDocument document = new PDDocument()) {
-            PDType0Font HelveticaFont = PDType0Font.load(document, new File(HELVETICA_path));
-            PDType0Font HelveticaBoldFont = PDType0Font.load(document, new File(HELVETICA_BOLD_path));
-            
-            // Crear una página con una altura mucho mayor
-            PDRectangle customPageSize = new PDRectangle(PDRectangle.A4.getWidth(), PDRectangle.A4.getHeight() * 3); // 3 veces la altura de una página A4
+            PDType0Font helveticaFont = PDType0Font.load(document, new File(HELVETICA_path));
+            PDType0Font helveticaBoldFont = PDType0Font.load(document, new File(HELVETICA_BOLD_path));
+
+            // Crear una página con una altura mayor
+            PDRectangle customPageSize = new PDRectangle(PDRectangle.A4.getWidth(), PDRectangle.A4.getHeight() * 3);
             PDPage page = new PDPage(customPageSize);
             document.addPage(page);
 
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                contentStream.setFont(HelveticaBoldFont, 10);
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            try {
+                // Encabezado del documento
+                contentStream.setFont(helveticaBoldFont, 12);
                 contentStream.beginText();
-                //contentStream.setFont(PDType1Font.HELVETICA_BOLD, 10);
-                contentStream.newLineAtOffset(100, customPageSize.getHeight() - 50);
-                contentStream.showText("Escuela o Area: " + planEstudios.getEscArea().getName());
+                contentStream.newLineAtOffset(50, customPageSize.getHeight() - 50);
+                contentStream.showText("Escuela: " + planEstudios.getEscArea().getName());
                 contentStream.endText();
 
                 contentStream.beginText();
-                contentStream.setFont(HelveticaBoldFont, 8);
-                contentStream.newLineAtOffset(100, customPageSize.getHeight() - 100);
-                contentStream.showText("Codigo Plan: " + planEstudios.getCode());
+                contentStream.setFont(helveticaBoldFont, 12);
+                contentStream.newLineAtOffset(50, customPageSize.getHeight() - 70);
+                contentStream.showText("Número de plan: " + planEstudios.getCode());
                 contentStream.endText();
 
-                float y = customPageSize.getHeight() - 130;
+                float y = customPageSize.getHeight() - 100;
+
                 for (int i = 0; i < planEstudios.getBloques().size(); i++) {
+                    String bloque = planEstudios.getBloques().get(i);
+                    System.out.println("Processing block: " + bloque);  // Debugging line
+
+                    // Título del bloque
                     contentStream.beginText();
-                    contentStream.setFont(HelveticaBoldFont, 8);
-                    contentStream.newLineAtOffset(120, y - i * 50);
-                    contentStream.showText(planEstudios.getBloques().get(i) + "                         Requisitos                      Correquistos");
-                    for (int j = 0; j < planEstudios.getBloqueCursos().get(planEstudios.getBloques().get(i)).size(); j++) {
-
-                        contentStream.setFont(HelveticaFont, 8);
-                        Curso curso = planEstudios.getBloqueCursos().get(planEstudios.getBloques().get(i)).get(j);
-                        contentStream.newLineAtOffset(0, -15);
-                        String requisito = "", correquisito = "", tabsStr = "";
-                        int tabs = 0;
-
-                        if (!curso.getRequisitos().isEmpty()) {
-                            for (int x = 0; x < curso.getRequisitos().size(); x++) {
-                                requisito += Integer.toString(curso.getRequisitos().get(x).getCode()) + "  ";
-                                tabs += 2;
-                            }
-                        }
-
-                        if (!curso.getCorrequisitos().isEmpty()) {
-                            for (int x = 0; x < curso.getCorrequisitos().size(); x++) {
-                                correquisito += Integer.toString(curso.getCorrequisitos().get(x).getCode()) + " ";
-                            }
-                        }
-
-                        tabs = 8 - tabs;
-
-                        for (int x = 0; x < tabs; x++) {
-                            tabsStr += "    ";
-                        }
-
-                        contentStream.showText(Integer.toString(curso.getCode()) + "                          " + requisito + tabsStr + correquisito);
-                    }
+                    contentStream.setFont(helveticaBoldFont, 10);
+                    contentStream.newLineAtOffset(50, y - 20);
+                    contentStream.showText("Bloque " + bloque);
                     contentStream.endText();
-                }
 
-                contentStream.close();
+                    // Títulos de las columnas
+                    contentStream.beginText();
+                    contentStream.setFont(helveticaBoldFont, 10);
+                    contentStream.newLineAtOffset(70, y - 40);
+                    contentStream.showText("Curso");
+                    contentStream.newLineAtOffset(200, 0);
+                    contentStream.showText("Requisitos");
+                    contentStream.newLineAtOffset(200, 0);
+                    contentStream.showText("Correquisitos");
+                    contentStream.endText();
 
-                // Check if the directory exists, create it if it doesn't
-                File file = new File(dest);
-                File parentDir = file.getParentFile();
-                if (parentDir != null && !parentDir.exists()) {
-                    if (!parentDir.mkdirs()) {
-                        throw new IOException("Failed to create directory: " + parentDir);
+                    y -= 60;
+
+                    if (planEstudios.getBloqueCursos().containsKey(bloque)) {
+                        for (Curso curso : planEstudios.getBloqueCursos().get(bloque)) {
+                            contentStream.beginText();
+                            contentStream.setFont(helveticaFont, 10);
+                            contentStream.newLineAtOffset(70, y);
+
+                            // Escribir el curso
+                            contentStream.showText(curso.getName() + ":" + curso.getCode());
+
+                            // Escribir los requisitos
+                            contentStream.newLineAtOffset(200, 0);
+                            String requisitos = curso.getRequisitos().stream()
+                                    .map(r -> r.getName() + ":" + r.getCode())
+                                    .reduce((r1, r2) -> r1 + " " + r2).orElse("");
+                            contentStream.showText(requisitos);
+
+                            // Escribir los correquisitos
+                            contentStream.newLineAtOffset(200, 0);
+                            String correquisitos = curso.getCorrequisitos().stream()
+                                    .map(c -> c.getName() + ":" + c.getCode())
+                                    .reduce((c1, c2) -> c1 + " " + c2).orElse("");
+                            contentStream.showText(correquisitos);
+
+                            contentStream.endText();
+                            y -= 20; // Espaciado entre cursos
+
+                            System.out.println("Added course: " + curso.getName());  // Debugging line
+
+                            // Verificar si es necesario agregar una nueva página
+                            if (y < 50) {
+                                contentStream.close();
+                                page = new PDPage(customPageSize);
+                                document.addPage(page);
+                                contentStream = new PDPageContentStream(document, page);
+                                y = customPageSize.getHeight() - 50;
+                            }
+                        }
+                    } else {
+                        System.out.println("No courses found for block: " + bloque);  // Debugging line
                     }
-                }
 
-                // Save the document
-                document.save(dest);
-                System.out.println("PDF saved successfully at: " + dest);
+                    y -= 20; // Espaciado entre bloques
+                }
 
             } catch (IOException e) {
                 Logger.getLogger(PDFCreator.class.getName()).log(Level.SEVERE, "Error writing PDF content", e);
+            } finally {
+                contentStream.close();
             }
+
+            // Verificar si el directorio existe y crearlo si no
+            File file = new File(dest);
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                if (!parentDir.mkdirs()) {
+                    throw new IOException("Failed to create directory: " + parentDir);
+                }
+            }
+
+            // Guardar el documento
+            document.save(dest);
+            System.out.println("PDF saved successfully at: " + dest);
+
         } catch (IOException ex) {
             Logger.getLogger(PDFCreator.class.getName()).log(Level.SEVERE, "Error creating PDF document", ex);
         }
