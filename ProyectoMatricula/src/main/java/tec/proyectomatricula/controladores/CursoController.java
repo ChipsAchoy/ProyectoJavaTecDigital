@@ -33,4 +33,13 @@ public class CursoController {
         return cursos.get(i);
     }
     
+    public List<Curso> getCursosByEscuela(String escuela){
+        List<Curso> cursosEscuela = new ArrayList<>();
+        for(Curso curso : cursos){
+            if(curso.getEscArea().getName().equals(escuela)){
+                cursosEscuela.add(curso);
+            }
+        }
+        return cursosEscuela;
+    }
 }

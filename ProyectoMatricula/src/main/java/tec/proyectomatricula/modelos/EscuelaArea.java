@@ -12,6 +12,7 @@ package tec.proyectomatricula.modelos;
 public class EscuelaArea {
     private String name;
     private String code;
+    
 
     public EscuelaArea(String name, String code) {
         this.name = name;
