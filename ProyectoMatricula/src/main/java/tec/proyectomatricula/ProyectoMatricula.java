@@ -9,8 +9,10 @@ package tec.proyectomatricula;
  * @author INTEL
  */
 public class ProyectoMatricula {
-
+    
+    /**
     public static void main(String[] args) {
         System.out.println("Hello World!");
     }
+    */
 }
