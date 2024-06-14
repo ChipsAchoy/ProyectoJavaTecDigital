@@ -695,18 +695,19 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ReqCorrEscuelaboxItemStateChanged
 
     private void RegCorrbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegCorrbuttonActionPerformed
-        // TODO add your handling code here:
-        Curso cursoCorr = cursoController.getCursos().get(ReqCorrCursoCorrbox.getSelectedIndex());
+        //add requisito to curso
+        Curso cursocorr = cursoController.getCursos().get(ReqCorrCursoCorrbox.getSelectedIndex());
         //get selected curso from escuela codigobox
         EscuelaArea escuela = escuelaController.getEscuelasArea().get(ReqCorrEscuelabox.getSelectedIndex());
-        List<Curso> cursos = cursoController.getCursosByEscuela(escuela.getName());
+        List<Curso> cursosEscuela = cursoController.getCursosByEscuela(escuela.getName());
+        
 
-        cursos.get(ReqCorrCursoCorrbox.getSelectedIndex()).addCorrequisito(cursoCorr);
+        cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).addCorrequisito(cursocorr);
 
-        //print correlativos del curso
-        System.out.println("Correlativos de " + cursos.get(ReqCorrCursoCorrbox.getSelectedIndex()).getName());
-        cursos.get(ReqCorrCursoCorrbox.getSelectedIndex()).getCorrequisitos().forEach((correlativo) -> {
-            System.out.println(correlativo.getName());
+        //print requisitos del curso
+        System.out.println("Correquisitos de " + cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getName());
+        cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getCorrequisitos().forEach((correquisito) -> {
+            System.out.println(correquisito.getName());
         });
 
     }//GEN-LAST:event_RegCorrbuttonActionPerformed
@@ -718,13 +719,14 @@ public class GUI extends javax.swing.JFrame {
         Curso cursoReq = cursoController.getCursos().get(ReqCorrCodReqbox.getSelectedIndex());
         //get selected curso from escuela codigobox
         EscuelaArea escuela = escuelaController.getEscuelasArea().get(ReqCorrEscuelabox.getSelectedIndex());
-        List<Curso> cursos = cursoController.getCursosByEscuela(escuela.getName());
+        List<Curso> cursosEscuela = cursoController.getCursosByEscuela(escuela.getName());
+        
 
-        cursos.get(ReqCorrCodReqbox.getSelectedIndex()).addRequisito(cursoReq);
+        cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).addRequisito(cursoReq);
 
         //print requisitos del curso
-        System.out.println("Requisitos de " + cursos.get(ReqCorrCodReqbox.getSelectedIndex()).getName());
-        cursos.get(ReqCorrCodReqbox.getSelectedIndex()).getRequisitos().forEach((requisito) -> {
+        System.out.println("Requisitos de " + cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getName());
+        cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getRequisitos().forEach((requisito) -> {
             System.out.println(requisito.getName());
         });
 
