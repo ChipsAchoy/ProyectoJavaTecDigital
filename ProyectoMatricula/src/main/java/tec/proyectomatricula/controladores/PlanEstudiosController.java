@@ -27,7 +27,7 @@ public class PlanEstudiosController {
     public List<PlanEstudios> getPlanEstudios() {
         return planEstudios;
     }
-    public PlanEstudios getCursoByI(int i){
+    public PlanEstudios getPlanByI(int i){
         
         return planEstudios.get(i);
     }

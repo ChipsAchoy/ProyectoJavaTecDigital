@@ -4,12 +4,21 @@
  */
 package tec.proyectomatricula;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JFileChooser;
+import tec.proyectomatricula.FileController.PDFCreator;
 
 import tec.proyectomatricula.controladores.CursoController;
 import tec.proyectomatricula.controladores.EscuelaAreaController;
+import tec.proyectomatricula.controladores.PlanEstudiosController;
 import tec.proyectomatricula.modelos.Curso;
 import tec.proyectomatricula.modelos.EscuelaArea;
+import tec.proyectomatricula.modelos.PlanEstudios;
 
 /**
  *
@@ -81,6 +90,28 @@ public class GUI extends javax.swing.JFrame {
         RegReqbutton = new javax.swing.JButton();
         RegCorrbutton = new javax.swing.JButton();
         ReqCorr_to_menubutton = new javax.swing.JButton();
+        PlanEstudioPanel = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        PlanEscuelabox = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        PlanCodigoField = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        PlanCursoField = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        PlanSemestrebox = new javax.swing.JComboBox<>();
+        PlanRegbutton = new javax.swing.JButton();
+        Planes_to_menubutton = new javax.swing.JButton();
+        PlanDiabox = new javax.swing.JComboBox<>();
+        PlanAnnobox = new javax.swing.JComboBox<>();
+        PlanMesbox = new javax.swing.JComboBox<>();
+        PDFPanel = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        PDFPlanbox = new javax.swing.JComboBox<>();
+        GenPDFbutton = new javax.swing.JButton();
+        PDF_to_menubutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,28 +159,25 @@ public class GUI extends javax.swing.JFrame {
         MenuPanelLayout.setHorizontalGroup(
             MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuPanelLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(ReqCorrMenuButton)
-                .addContainerGap(209, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuPanelLayout.createSequentialGroup()
+                .addGap(213, 213, 213)
                 .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(RegCursoMenubutton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RegEscuelaMenubutton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(PDFMenubutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CreatePlanMenubutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(222, 222, 222))
+                    .addGroup(MenuPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RegCursoMenubutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RegEscuelaMenubutton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MenuLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(PDFMenubutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CreatePlanMenubutton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ReqCorrMenuButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         MenuPanelLayout.setVerticalGroup(
             MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(MenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(RegEscuelaMenubutton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,7 +189,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(CreatePlanMenubutton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PDFMenubutton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         RegEscuelaLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -542,6 +570,189 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel15.setText("Registro de Planes de Estudio");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel16.setText("Escuela/Área propietaria del plan:");
+
+        PlanEscuelabox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setText("Vigencia del plan estudios:");
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel18.setText("Código del plan estudios:");
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel19.setText("Código del curso que forma parte del plan:");
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel20.setText("Bloque:");
+
+        PlanSemestrebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        PlanRegbutton.setText("Registrar curso al plan de estudios");
+        PlanRegbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlanRegbuttonActionPerformed(evt);
+            }
+        });
+
+        Planes_to_menubutton.setText("volver");
+        Planes_to_menubutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Planes_to_menubuttonActionPerformed(evt);
+            }
+        });
+
+        PlanDiabox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        PlanAnnobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        PlanMesbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout PlanEstudioPanelLayout = new javax.swing.GroupLayout(PlanEstudioPanel);
+        PlanEstudioPanel.setLayout(PlanEstudioPanelLayout);
+        PlanEstudioPanelLayout.setHorizontalGroup(
+            PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlanEstudioPanelLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PlanEstudioPanelLayout.createSequentialGroup()
+                        .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18))
+                        .addGap(18, 18, 18)
+                        .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PlanEscuelabox, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PlanCodigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PlanEstudioPanelLayout.createSequentialGroup()
+                                .addComponent(PlanDiabox, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(PlanMesbox, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(PlanAnnobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(PlanEstudioPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 129, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlanEstudioPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlanEstudioPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(161, 161, 161))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlanEstudioPanelLayout.createSequentialGroup()
+                        .addComponent(PlanRegbutton)
+                        .addGap(219, 219, 219))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlanEstudioPanelLayout.createSequentialGroup()
+                        .addComponent(Planes_to_menubutton)
+                        .addGap(28, 28, 28))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlanEstudioPanelLayout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(PlanCursoField, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PlanSemestrebox, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
+        );
+        PlanEstudioPanelLayout.setVerticalGroup(
+            PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlanEstudioPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(PlanEscuelabox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PlanCodigoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addGap(18, 18, 18)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(PlanDiabox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PlanAnnobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PlanMesbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PlanEstudioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PlanCursoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PlanSemestrebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(PlanRegbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Planes_to_menubutton)
+                .addGap(21, 21, 21))
+        );
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel21.setText("Generar PDF");
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel22.setText("Plan de Estudio:");
+
+        PDFPlanbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        GenPDFbutton.setText("Generar PDF");
+        GenPDFbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenPDFbuttonActionPerformed(evt);
+            }
+        });
+
+        PDF_to_menubutton.setText("volver");
+        PDF_to_menubutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PDF_to_menubuttonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PDFPanelLayout = new javax.swing.GroupLayout(PDFPanel);
+        PDFPanel.setLayout(PDFPanelLayout);
+        PDFPanelLayout.setHorizontalGroup(
+            PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PDFPanelLayout.createSequentialGroup()
+                .addContainerGap(183, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addGap(18, 18, 18)
+                .addComponent(PDFPlanbox, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133))
+            .addGroup(PDFPanelLayout.createSequentialGroup()
+                .addGroup(PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PDFPanelLayout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(jLabel21))
+                    .addGroup(PDFPanelLayout.createSequentialGroup()
+                        .addGap(278, 278, 278)
+                        .addComponent(GenPDFbutton))
+                    .addGroup(PDFPanelLayout.createSequentialGroup()
+                        .addGap(287, 287, 287)
+                        .addComponent(PDF_to_menubutton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PDFPanelLayout.setVerticalGroup(
+            PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PDFPanelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addGroup(PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(PDFPlanbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(151, 151, 151)
+                .addComponent(GenPDFbutton)
+                .addGap(41, 41, 41)
+                .addComponent(PDF_to_menubutton)
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -553,6 +764,10 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(RegCursoPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ReqCorrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PlanEstudioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PDFPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,6 +778,10 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(RegCursoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ReqCorrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PlanEstudioPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PDFPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -585,10 +804,17 @@ public class GUI extends javax.swing.JFrame {
 
     private void CreatePlanMenubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePlanMenubuttonActionPerformed
         // TODO add your handling code here:
+        menu_to_PlanEstudio();
     }//GEN-LAST:event_CreatePlanMenubuttonActionPerformed
 
     private void PDFMenubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PDFMenubuttonActionPerformed
         // TODO add your handling code here:
+        menu_to_PDF();
+        //Crear un pdf con la informacion de las escuelas, cursos, requisitos y correquisitos
+       
+        
+
+
     }//GEN-LAST:event_PDFMenubuttonActionPerformed
 
     private void RegistrarEscuelabuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarEscuelabuttonActionPerformed
@@ -704,12 +930,6 @@ public class GUI extends javax.swing.JFrame {
 
         cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).addCorrequisito(cursocorr);
 
-        //print requisitos del curso
-        System.out.println("Correquisitos de " + cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getName());
-        cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getCorrequisitos().forEach((correquisito) -> {
-            System.out.println(correquisito.getName());
-        });
-
     }//GEN-LAST:event_RegCorrbuttonActionPerformed
 
     private void RegReqbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegReqbuttonActionPerformed
@@ -724,18 +944,78 @@ public class GUI extends javax.swing.JFrame {
 
         cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).addRequisito(cursoReq);
 
-        //print requisitos del curso
-        System.out.println("Requisitos de " + cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getName());
-        cursosEscuela.get(ReqCorrCodigoCbox.getSelectedIndex()).getRequisitos().forEach((requisito) -> {
-            System.out.println(requisito.getName());
-        });
-
     }//GEN-LAST:event_RegReqbuttonActionPerformed
 
     private void ReqCorr_to_menubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReqCorr_to_menubuttonActionPerformed
         // TODO add your handling code here:
         ReqCorr_to_menu();
     }//GEN-LAST:event_ReqCorr_to_menubuttonActionPerformed
+
+    private void PlanRegbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlanRegbuttonActionPerformed
+        // TODO add your handling code here:
+
+        //Revisar si los campos estan vacios mostrar un joptionpane
+        if(PlanCodigoField.getText().isEmpty() || PlanCursoField.getText().isEmpty()){
+            javax.swing.JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //revisar que la fecha sea valida
+        else if(Integer.parseInt(PlanDiabox.getSelectedItem().toString()) < 1 || Integer.parseInt(PlanDiabox.getSelectedItem().toString()) > 31 || Integer.parseInt(PlanMesbox.getSelectedItem().toString()) < 1 || Integer.parseInt(PlanMesbox.getSelectedItem().toString()) > 12 || Integer.parseInt(PlanAnnobox.getSelectedItem().toString()) < 2000 || Integer.parseInt(PlanAnnobox.getSelectedItem().toString()) > 2030){
+            javax.swing.JOptionPane.showMessageDialog(this, "Fecha no valida", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //revisar febrero
+        else if(Integer.parseInt(PlanDiabox.getSelectedItem().toString()) > 29 && Integer.parseInt(PlanMesbox.getSelectedItem().toString()) == 2){
+            javax.swing.JOptionPane.showMessageDialog(this, "Fecha no valida", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //revisar codigo de curso valido
+        else if(cursoController.getCursos().stream().noneMatch((curso) -> (curso.getEscArea().getCode()+curso.getCode()).equals(PlanCursoField.getText()))){
+            javax.swing.JOptionPane.showMessageDialog(this, "No existe un curso con ese codigo", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //revisar que no se reptira curso en bloque
+        else if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCursos().stream().anyMatch((curso) -> curso.getEscArea().getCode()+curso.getCode() == PlanCursoField.getText()))){
+            javax.swing.JOptionPane.showMessageDialog(this, "No se puede repetir un curso en un bloque", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        //codigo de plan debe ser 4 caracteres
+        else if(PlanCodigoField.getText().length() != 4){
+            javax.swing.JOptionPane.showMessageDialog(this, "El código del plan debe ser de 4 caracteres", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            //Crear un nuevo plan de estudio
+            create_plan();
+
+        }
+    }//GEN-LAST:event_PlanRegbuttonActionPerformed
+
+    private void Planes_to_menubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Planes_to_menubuttonActionPerformed
+        // TODO add your handling code here:
+        PlanEstudio_to_menu();
+        
+    }//GEN-LAST:event_Planes_to_menubuttonActionPerformed
+
+    private void PDF_to_menubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PDF_to_menubuttonActionPerformed
+        // TODO add your handling code here:
+        PDF_to_menu();
+    }//GEN-LAST:event_PDF_to_menubuttonActionPerformed
+
+    private void GenPDFbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenPDFbuttonActionPerformed
+        // TODO add your handling code here:
+
+        //get selected plan
+        PlanEstudios plan = planEstudioController.getPlanEstudios().get(PDFPlanbox.getSelectedIndex());
+        //get path
+        if(path == null){
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un path", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            //create pdf
+            PDFCreator pdfCreator = new PDFCreator();
+            String fullpath = path + plan.getEscArea().getCode() +Integer.toString(plan.getCode())+".pdf";
+            pdfCreator.createPDF(fullpath, plan);
+            javax.swing.JOptionPane.showMessageDialog(this, "PDF generado con exito");
+            
+           
+        }
+
+    }//GEN-LAST:event_GenPDFbuttonActionPerformed
     
     
     
@@ -756,14 +1036,16 @@ public class GUI extends javax.swing.JFrame {
 
         //set list of escuelas to RegCursoEscuelabox
         RegCursoEscuelabox.removeAllItems();
-        escuelaController.getEscuelasArea().forEach((escuela) -> {
+        if (!escuelaController.getEscuelasArea().isEmpty()) {
+            escuelaController.getEscuelasArea().forEach((escuela) -> {
             RegCursoEscuelabox.addItem(escuela.getName());
-        });
-        //set RegCursoEscuelaCodigoLabel to the code of the first escuela
-        RegCursoEscuelaCodigoLabel.setText(escuelaController.getEscuelasArea().get(0).getCode());
+            });
+            //set RegCursoEscuelaCodigoLabel to the code of the first escuela
+            RegCursoEscuelaCodigoLabel.setText(escuelaController.getEscuelasArea().get(0).getCode());
 
-        //set RegCursoEscuelabox selected index to 0
-        RegCursoEscuelabox.setSelectedIndex(0);
+            //set RegCursoEscuelabox selected index to 0
+            RegCursoEscuelabox.setSelectedIndex(0);
+        }
 
         //set list of creditos to RegCursoCredbox from 0 to 4
         RegCursoCredbox.removeAllItems();
@@ -823,11 +1105,6 @@ public class GUI extends javax.swing.JFrame {
         cursoController.getCursos().forEach((curso) -> {
             ReqCorrCursoCorrbox.addItem(curso.getEscArea().getCode()+Integer.toString(curso.getCode()));
         });
-        
-
-        
-        
-        
     }
 
     private void ReqCorr_to_menu(){
@@ -835,11 +1112,181 @@ public class GUI extends javax.swing.JFrame {
         MenuPanel.setVisible(true);
     }
     
-    
+    private void PlanEstudio_to_menu(){
+        PlanEstudioPanel.setVisible(false);
+        MenuPanel.setVisible(true);
+
+        
+
+    }
+
+    private void menu_to_PlanEstudio(){
+        PlanEstudioPanel.setVisible(true);
+        MenuPanel.setVisible(false);
+        //set PlanEscuelabox to the escuelas
+        PlanEscuelabox.removeAllItems();
+        escuelaController.getEscuelasArea().forEach((escuela) -> {
+            PlanEscuelabox.addItem(escuela.getName());
+        });
+
+        //set PlanDiabox to the dias
+        PlanDiabox.removeAllItems();
+        for(int i = 1; i < 32; i++){
+            PlanDiabox.addItem(Integer.toString(i));
+        }
+
+        //set PlanMesbox to the meses
+        PlanMesbox.removeAllItems();
+        for(int i = 1; i < 13; i++){
+            PlanMesbox.addItem(Integer.toString(i));
+        }
+
+        //set PlanAnnobox to the años
+        PlanAnnobox.removeAllItems();
+        for(int i = 2000; i < 2031; i++){
+            PlanAnnobox.addItem(Integer.toString(i));
+        }
+
+        //set PlanSemestrebox to the semestres with the following format: "l Semestre", "ll Semestre" until "Xl Semestre" 
+        PlanSemestrebox.removeAllItems();
+        for(int i = 1; i < 11; i++){
+            PlanSemestrebox.addItem( toRoman(i) + " Semestre");
+        }
+    }
+
+    private void menu_to_PDF(){
+        PDFPanel.setVisible(true);
+        MenuPanel.setVisible(false);
+
+        //set PDFPlanbox to the planes de estudio
+        PDFPlanbox.removeAllItems();
+        planEstudioController.getPlanEstudios().forEach((plan) -> {
+            PDFPlanbox.addItem(plan.getEscArea().getName() + Integer.toString(plan.getCode()));
+        });
+
+    }
+
+    private void PDF_to_menu(){
+        PDFPanel.setVisible(false);
+        MenuPanel.setVisible(true);
+    }
+
+
+    //function to turn numbers into roman numerals
+    private String toRoman(int number){
+        String roman = "";
+        while(number >= 1000){
+            roman += "M";
+            number -= 1000;
+        }
+        while(number >= 900){
+            roman += "CM";
+            number -= 900;
+        }
+        while(number >= 500){
+            roman += "D";
+            number -= 500;
+        }
+        while(number >= 400){
+            roman += "CD";
+            number -= 400;
+        }
+        while(number >= 100){
+            roman += "C";
+            number -= 100;
+        }
+        while(number >= 90){
+            roman += "XC";
+            number -= 90;
+        }
+        while(number >= 50){
+            roman += "L";
+            number -= 50;
+        }
+        while(number >= 40){
+            roman += "XL";
+            number -= 40;
+        }
+        while(number >= 10){
+            roman += "X";
+            number -= 10;
+        }
+        while(number >= 9){
+            roman += "IX";
+            number -= 9;
+        }
+        while(number >= 5){
+            roman += "V";
+            number -= 5;
+        }
+        while(number >= 4){
+            roman += "IV";
+            number -= 4;
+        }
+        while(number >= 1){
+            roman += "I";
+            number -= 1;
+        }
+        return roman;
+    }
+
+    private void create_plan(){
+        
+        EscuelaArea escuela = escuelaController.getEscuelasArea().get(PlanEscuelabox.getSelectedIndex());
+        System.out.println(escuela.getName());
+
+        List<Curso> cursosEscuela = cursoController.getCursos();
+        
+        Curso curso = cursosEscuela.stream().filter((c) -> (c.getEscArea().getCode()+c.getCode()).equals(PlanCursoField.getText())).findFirst().get();
+        System.out.println(curso.getName());
+
+        int code = Integer.parseInt(PlanCodigoField.getText());
+        System.out.println(code);
+
+        String fecha = PlanDiabox.getSelectedItem().toString() + "/" + PlanMesbox.getSelectedItem().toString() + "/" + PlanAnnobox.getSelectedItem().toString();
+        System.out.println(fecha);
+
+        String semestre = PlanSemestrebox.getSelectedItem().toString();
+        System.out.println(semestre);
+        
+        //check if plan already exists
+        if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCode() == code)){
+            PlanEstudios planold = planEstudioController.getPlanEstudios().stream().filter((plan) -> plan.getCode() == code).findFirst().get();
+
+            planold.addCurso(curso);
+
+            //check if semestre already exists
+            if(planold.getBloques().stream().anyMatch((bloque) -> bloque.equals(semestre))){
+                planold.asociarCursoABloque(curso, semestre);
+
+            }else{
+
+                planold.addBloque(semestre);
+                planold.asociarCursoABloque(curso, semestre);
+            }
+
+           
+        }
+        else{
+            PlanEstudios plannew = new PlanEstudios(escuela, code, fecha);
+            plannew.addCurso(curso);
+            plannew.addBloque(semestre);
+            planEstudioController.addPlanEstudio(plannew);
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Curso registrado en plan de estudios con exito");
+        
+        
+    }
+
+
+
     //Variables Globals
     
     public EscuelaAreaController escuelaController = new EscuelaAreaController();
     public CursoController cursoController = new CursoController();
+    public PlanEstudiosController planEstudioController = new PlanEstudiosController();
+    String path = "C:/Users/david/OneDrive/Documents/PROGRA/ProyectoJavaTecDigital/ProyectoMatricula/PDFs/";
     
     
     /**
@@ -879,7 +1326,33 @@ public class GUI extends javax.swing.JFrame {
                 gui.RegEscuelaPanel.setVisible(false);
                 gui.RegCursoPanel.setVisible(false);
                 gui.ReqCorrPanel.setVisible(false);
+                gui.PlanEstudioPanel.setVisible(false);
+                gui.PDFPanel.setVisible(false);
                 
+                //generate some data for test
+                EscuelaArea escuela1 = new EscuelaArea("Escuela de Ingenieria", "EI");
+                EscuelaArea escuela2 = new EscuelaArea("Escuela de Ciencias", "EC");
+
+                Curso curso1 = new Curso(escuela1, "Calculo I", 1011, 4, 4);
+                Curso curso2 = new Curso(escuela1, "Calculo II", 1021, 4, 4);
+
+                Curso curso3 = new Curso(escuela2, "Fisica I", 2011, 4, 4);
+                Curso curso4 = new Curso(escuela2, "Fisica II", 2021, 4, 4);
+
+                Curso curso5 = new Curso(escuela1, "Algebra Lineal", 1031, 4, 4);
+                Curso curso6 = new Curso(escuela1, "Calculo III", 1041, 4, 4);
+                
+                gui.escuelaController.addEscuelaArea(escuela1);
+                gui.escuelaController.addEscuelaArea(escuela2);
+
+                gui.cursoController.addCurso(curso1);
+                gui.cursoController.addCurso(curso2);
+                gui.cursoController.addCurso(curso3);
+                gui.cursoController.addCurso(curso4);
+                gui.cursoController.addCurso(curso5);
+                gui.cursoController.addCurso(curso6);
+
+
             }
         });
     }
@@ -889,6 +1362,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton CreatePlanMenubutton;
     private javax.swing.JButton Cursos_to_Menubutton;
     private javax.swing.JButton Escuela_to_menubutton;
+    private javax.swing.JButton GenPDFbutton;
     private javax.swing.JButton LimpiarCursosbutton;
     private javax.swing.JButton LimpiarEscuelabutton;
     private javax.swing.JLabel MenuLabel;
@@ -896,6 +1370,19 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField NombreCursoField;
     private javax.swing.JTextField NombreField;
     private javax.swing.JButton PDFMenubutton;
+    private javax.swing.JPanel PDFPanel;
+    private javax.swing.JComboBox<String> PDFPlanbox;
+    private javax.swing.JButton PDF_to_menubutton;
+    private javax.swing.JComboBox<String> PlanAnnobox;
+    private javax.swing.JTextField PlanCodigoField;
+    private javax.swing.JTextField PlanCursoField;
+    private javax.swing.JComboBox<String> PlanDiabox;
+    private javax.swing.JComboBox<String> PlanEscuelabox;
+    private javax.swing.JPanel PlanEstudioPanel;
+    private javax.swing.JComboBox<String> PlanMesbox;
+    private javax.swing.JButton PlanRegbutton;
+    private javax.swing.JComboBox<String> PlanSemestrebox;
+    private javax.swing.JButton Planes_to_menubutton;
     private javax.swing.JButton RegCorrbutton;
     private javax.swing.JTextField RegCursoCodField;
     private javax.swing.JComboBox<String> RegCursoCredbox;
@@ -925,7 +1412,15 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
