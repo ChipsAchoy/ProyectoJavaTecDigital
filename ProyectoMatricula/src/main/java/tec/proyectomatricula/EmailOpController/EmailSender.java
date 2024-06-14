@@ -15,9 +15,9 @@ import java.util.logging.Logger;
 public class EmailSender {
 
     public void emailSend(String emailString, String contentString, File pdfFile) {
-        String apiKey = "abd504c304080821d3974ec7b4d493b5";
-        String apiSecret = "a4d800716733625356c1a20fc8bd6fe5";
-        String fromEmail = "antoca29@gmail.com";
+        String apiKey = "317a7b4b8ae14a4ec5f024ac33620e17";
+        String apiSecret = "5a3f7c6d6822e3261d3c057beb5d3a16";
+        String fromEmail = "antoca299@gmail.com";
         String fromName = "Proyecto Trivia";
         String toEmail = emailString;
         String toName = "Estimado usuario";
