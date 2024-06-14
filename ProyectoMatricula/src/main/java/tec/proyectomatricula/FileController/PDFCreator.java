@@ -44,6 +44,12 @@ public class PDFCreator {
                 contentStream.newLineAtOffset(50, customPageSize.getHeight() - 70);
                 contentStream.showText("Número de plan: " + planEstudios.getCode());
                 contentStream.endText();
+                
+                contentStream.beginText();
+                contentStream.setFont(helveticaBoldFont, 12);
+                contentStream.newLineAtOffset(50, customPageSize.getHeight() - 90);
+                contentStream.showText("Vigencia: " + planEstudios.getDateValid());
+                contentStream.endText();
 
                 float y = customPageSize.getHeight() - 100;
 
