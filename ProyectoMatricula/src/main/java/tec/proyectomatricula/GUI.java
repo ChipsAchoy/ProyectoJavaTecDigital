@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFileChooser;
+
+import tec.proyectomatricula.EmailOpController.EmailSender;
 import tec.proyectomatricula.FileController.PDFCreator;
 
 import tec.proyectomatricula.controladores.CursoController;
@@ -112,6 +114,7 @@ public class GUI extends javax.swing.JFrame {
         PDFPlanbox = new javax.swing.JComboBox<>();
         GenPDFbutton = new javax.swing.JButton();
         PDF_to_menubutton = new javax.swing.JButton();
+        Correobutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -714,28 +717,38 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        Correobutton.setText("Enviar por correo");
+        Correobutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CorreobuttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PDFPanelLayout = new javax.swing.GroupLayout(PDFPanel);
         PDFPanel.setLayout(PDFPanelLayout);
         PDFPanelLayout.setHorizontalGroup(
             PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PDFPanelLayout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
-                .addComponent(jLabel22)
-                .addGap(18, 18, 18)
-                .addComponent(PDFPlanbox, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
             .addGroup(PDFPanelLayout.createSequentialGroup()
                 .addGroup(PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PDFPanelLayout.createSequentialGroup()
                         .addGap(256, 256, 256)
                         .addComponent(jLabel21))
                     .addGroup(PDFPanelLayout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(GenPDFbutton))
-                    .addGroup(PDFPanelLayout.createSequentialGroup()
                         .addGap(287, 287, 287)
                         .addComponent(PDF_to_menubutton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PDFPanelLayout.createSequentialGroup()
+                .addContainerGap(183, Short.MAX_VALUE)
+                .addGroup(PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PDFPanelLayout.createSequentialGroup()
+                        .addComponent(GenPDFbutton)
+                        .addGap(100, 100, 100)
+                        .addComponent(Correobutton))
+                    .addGroup(PDFPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(18, 18, 18)
+                        .addComponent(PDFPlanbox, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(133, 133, 133))
         );
         PDFPanelLayout.setVerticalGroup(
             PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -746,9 +759,11 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(PDFPlanbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(151, 151, 151)
-                .addComponent(GenPDFbutton)
-                .addGap(41, 41, 41)
+                .addGap(149, 149, 149)
+                .addGroup(PDFPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GenPDFbutton)
+                    .addComponent(Correobutton))
+                .addGap(43, 43, 43)
                 .addComponent(PDF_to_menubutton)
                 .addContainerGap(93, Short.MAX_VALUE))
         );
@@ -1007,6 +1022,8 @@ public class GUI extends javax.swing.JFrame {
         }
         else{
             //create pdf
+     
+
             PDFCreator pdfCreator = new PDFCreator();
             String fullpath = path + plan.getEscArea().getCode() +Integer.toString(plan.getCode())+".pdf";
             pdfCreator.createPDF(fullpath, plan);
@@ -1016,6 +1033,26 @@ public class GUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_GenPDFbuttonActionPerformed
+
+    private void CorreobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreobuttonActionPerformed
+        // TODO add your handling code here:
+        //open joptionpane to input email
+        String email = javax.swing.JOptionPane.showInputDialog(this, "Ingrese el correo electronico", "Correo", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        PlanEstudios plan = planEstudioController.getPlanEstudios().get(PDFPlanbox.getSelectedIndex());
+        EmailSender emailSender = new EmailSender();
+
+        //check if pdf has been created by checking if the fil
+        try{
+            String fullpath = path + plan.getEscArea().getCode() +Integer.toString(plan.getCode())+".pdf";
+            File fpdf = new File(fullpath);         
+            emailSender.emailSend(email, "Reciba un saludo, estimad@ usuari@, este es el plan de estudio", fpdf);
+            javax.swing.JOptionPane.showMessageDialog(this, "Correo enviado con exito");
+        }catch(Exception e){
+            javax.swing.JOptionPane.showMessageDialog(this, "No se ha generado un PDF", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        
+
+    }//GEN-LAST:event_CorreobuttonActionPerformed
     
     
     
@@ -1233,21 +1270,21 @@ public class GUI extends javax.swing.JFrame {
     private void create_plan(){
         
         EscuelaArea escuela = escuelaController.getEscuelasArea().get(PlanEscuelabox.getSelectedIndex());
-        System.out.println(escuela.getName());
+        //System.out.println(escuela.getName());
 
         List<Curso> cursosEscuela = cursoController.getCursos();
         
         Curso curso = cursosEscuela.stream().filter((c) -> (c.getEscArea().getCode()+c.getCode()).equals(PlanCursoField.getText())).findFirst().get();
-        System.out.println(curso.getName());
+        //System.out.println(curso.getName());
 
         int code = Integer.parseInt(PlanCodigoField.getText());
-        System.out.println(code);
+        //System.out.println(code);
 
         String fecha = PlanDiabox.getSelectedItem().toString() + "/" + PlanMesbox.getSelectedItem().toString() + "/" + PlanAnnobox.getSelectedItem().toString();
-        System.out.println(fecha);
+        //System.out.println(fecha);
 
         String semestre = PlanSemestrebox.getSelectedItem().toString();
-        System.out.println(semestre);
+        //System.out.println(semestre);
         
         //check if plan already exists
         if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCode() == code)){
@@ -1271,7 +1308,9 @@ public class GUI extends javax.swing.JFrame {
             PlanEstudios plannew = new PlanEstudios(escuela, code, fecha);
             plannew.addCurso(curso);
             plannew.addBloque(semestre);
+            plannew.asociarCursoABloque(curso, semestre);
             planEstudioController.addPlanEstudio(plannew);
+           
         }
 
         javax.swing.JOptionPane.showMessageDialog(this, "Curso registrado en plan de estudios con exito");
@@ -1359,6 +1398,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CodigoField;
+    private javax.swing.JButton Correobutton;
     private javax.swing.JButton CreatePlanMenubutton;
     private javax.swing.JButton Cursos_to_Menubutton;
     private javax.swing.JButton Escuela_to_menubutton;

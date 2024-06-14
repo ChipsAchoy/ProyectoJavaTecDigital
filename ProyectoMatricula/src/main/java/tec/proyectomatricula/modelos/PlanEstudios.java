@@ -88,5 +88,6 @@ public class PlanEstudios {
             throw new IllegalArgumentException("El curso no existe en la lista de cursos.");
         }
         this.bloqueCursos.get(bloque).add(curso);
+        
     }
 }

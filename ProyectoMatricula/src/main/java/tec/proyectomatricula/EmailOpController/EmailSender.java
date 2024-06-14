@@ -15,13 +15,14 @@ import java.util.logging.Logger;
 public class EmailSender {
 
     public void emailSend(String emailString, String contentString, File pdfFile) {
+
         String apiKey = "317a7b4b8ae14a4ec5f024ac33620e17";
         String apiSecret = "5a3f7c6d6822e3261d3c057beb5d3a16";
         String fromEmail = "antoca299@gmail.com";
-        String fromName = "Proyecto Trivia";
+        String fromName = "Proyecto Plan de estudios";
         String toEmail = emailString;
         String toName = "Estimado usuario";
-        String subject = "Trivia";
+        String subject = "Plan de Estudios";
         String htmlContent = "<html><body><p>" + contentString + "</p></body></html>";
 
         OkHttpClient client = new OkHttpClient();
