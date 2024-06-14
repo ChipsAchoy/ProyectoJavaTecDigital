@@ -18,10 +18,10 @@ public class EmailSender {
         String apiKey = "abd504c304080821d3974ec7b4d493b5";
         String apiSecret = "a4d800716733625356c1a20fc8bd6fe5";
         String fromEmail = "antoca29@gmail.com";
-        String fromName = "Proyecto Trivia";
+        String fromName = "Proyecto Plan de Estudios";
         String toEmail = emailString;
         String toName = "Estimado usuario";
-        String subject = "Trivia";
+        String subject = "Plan de Estudios";
         String htmlContent = "<html><body><p>" + contentString + "</p></body></html>";
 
         OkHttpClient client = new OkHttpClient();
