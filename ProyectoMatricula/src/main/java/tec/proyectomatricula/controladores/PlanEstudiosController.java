@@ -22,7 +22,7 @@ public class PlanEstudiosController {
 
     public void addPlanEstudio(PlanEstudios planEstudio) {
         planEstudios.add(planEstudio);
-    }
+    }   
 
     public List<PlanEstudios> getPlanEstudios() {
         return planEstudios;
