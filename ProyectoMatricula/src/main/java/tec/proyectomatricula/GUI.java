@@ -976,6 +976,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void PlanRegbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlanRegbuttonActionPerformed
         // TODO add your handling code here:
+        
 
         //Revisar si los campos estan vacios mostrar un joptionpane
         if(PlanCodigoField.getText().isEmpty() || PlanCursoField.getText().isEmpty()){
@@ -993,10 +994,7 @@ public class GUI extends javax.swing.JFrame {
         else if(cursoController.getCursos().stream().noneMatch((curso) -> (curso.getEscArea().getCode()+curso.getCode()).equals(PlanCursoField.getText()))){
             javax.swing.JOptionPane.showMessageDialog(this, "No existe un curso con ese codigo", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
-        //-------revisar que no se reptira curso en bloque
-        else if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCursos().stream().anyMatch((curso) -> (curso.getEscArea().getCode()+curso.getCode()).equals(PlanCursoField.getText())))){
-            javax.swing.JOptionPane.showMessageDialog(this, "No se puede repetir un curso en un bloque", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
-        }
+        
         //codigo de plan debe ser 4 numeros
         else if(PlanCodigoField.getText().length() != 4){
             javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser de 4 números", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
@@ -1302,21 +1300,32 @@ public class GUI extends javax.swing.JFrame {
         String semestre = PlanSemestrebox.getSelectedItem().toString();
         //System.out.println(semestre);
         
+        
         //check if plan already exists
-        if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> plan.getCode() == code)){
-            PlanEstudios planold = planEstudioController.getPlanEstudios().stream().filter((plan) -> plan.getCode() == code).findFirst().get();
-
-            planold.addCurso(curso);
-
-            //check if semestre already exists
-            if(planold.getBloques().stream().anyMatch((bloque) -> bloque.equals(semestre))){
-                planold.asociarCursoABloque(curso, semestre);
-
-            }else{
-
-                planold.addBloque(semestre);
-                planold.asociarCursoABloque(curso, semestre);
+        if(planEstudioController.getPlanEstudios().stream().anyMatch((plan) -> (plan.getEscArea().getCode() + plan.getCode()).equals(escuela.getCode()+code))){
+            PlanEstudios planold = planEstudioController.getPlanEstudios().stream().filter((plan) -> (plan.getEscArea().getCode() + plan.getCode()).equals(escuela.getCode()+code)).findFirst().get();
+            
+           
+            //check if curso already exists
+            if(planold.getCursos().stream().anyMatch((c) -> c.equals(curso))){
+                javax.swing.JOptionPane.showMessageDialog(this, "El curso ya esta registrado en el plan de estudios", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
             }
+            else{
+                planold.addCurso(curso);
+
+                //check if semestre already exists
+                if(planold.getBloques().stream().anyMatch((bloque) -> bloque.equals(semestre))){
+                    planold.asociarCursoABloque(curso, semestre);
+
+                }else{
+
+                    planold.addBloque(semestre);
+                    planold.asociarCursoABloque(curso, semestre);
+                }
+
+            }
+            
 
            
         }
@@ -1384,7 +1393,7 @@ public class GUI extends javax.swing.JFrame {
                 gui.PlanEstudioPanel.setVisible(false);
                 gui.PDFPanel.setVisible(false);
                 
-                /*
+                
                 
                 //generate some data for test
                 EscuelaArea escuela1 = new EscuelaArea("Escuela de Ingenieria", "EI");
@@ -1408,7 +1417,7 @@ public class GUI extends javax.swing.JFrame {
                 gui.cursoController.addCurso(curso4);
                 gui.cursoController.addCurso(curso5);
                 gui.cursoController.addCurso(curso6);
-                */
+                
 
 
             }
