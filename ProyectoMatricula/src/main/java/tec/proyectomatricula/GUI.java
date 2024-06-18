@@ -1384,6 +1384,8 @@ public class GUI extends javax.swing.JFrame {
                 gui.PlanEstudioPanel.setVisible(false);
                 gui.PDFPanel.setVisible(false);
                 
+                /*
+                
                 //generate some data for test
                 EscuelaArea escuela1 = new EscuelaArea("Escuela de Ingenieria", "EI");
                 EscuelaArea escuela2 = new EscuelaArea("Escuela de Ciencias", "EC");
@@ -1406,6 +1408,7 @@ public class GUI extends javax.swing.JFrame {
                 gui.cursoController.addCurso(curso4);
                 gui.cursoController.addCurso(curso5);
                 gui.cursoController.addCurso(curso6);
+                */
 
 
             }
