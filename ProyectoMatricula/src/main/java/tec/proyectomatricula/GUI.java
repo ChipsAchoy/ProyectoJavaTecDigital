@@ -899,7 +899,7 @@ public class GUI extends javax.swing.JFrame {
         else if(!RegCursoCodField.getText().matches("[0-9]+")){
             javax.swing.JOptionPane.showMessageDialog(this, "El código debe ser solo numeros", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
-        else if(cursoController.getCursos().stream().anyMatch((curso) -> Integer.toString(curso.getCode()).equals(RegCursoCodField.getText()))){
+        else if(cursoController.getCursos().stream().anyMatch((curso) -> Integer.toString(curso.getCode()).equals(RegCursoCodField.getText())  && curso.getEscArea().getCode().equals(escuelaController.getEscuelasArea().get(RegCursoEscuelabox.getSelectedIndex()).getCode()))){
             javax.swing.JOptionPane.showMessageDialog(this, "Ya existe un curso con ese codigo", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
         else{
@@ -1056,9 +1056,13 @@ public class GUI extends javax.swing.JFrame {
         //check if pdf has been created by checking if the fil
         try{
             String fullpath = path + plan.getEscArea().getCode() +Integer.toString(plan.getCode())+".pdf";
-            File fpdf = new File(fullpath);         
+            File fpdf = new File(fullpath);
+            if (!email.isEmpty()) {
             emailSender.emailSend(email, "Reciba un saludo, estimad@ usuari@, este es el plan de estudio", fpdf);
             javax.swing.JOptionPane.showMessageDialog(this, "Correo enviado con exito");
+            } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "El campo de correo está vacío", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
+            }
         }catch(Exception e){
             javax.swing.JOptionPane.showMessageDialog(this, "No se ha generado un PDF", "Warning", javax.swing.JOptionPane.WARNING_MESSAGE);
         }
