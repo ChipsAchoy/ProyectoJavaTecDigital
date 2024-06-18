@@ -36,7 +36,7 @@ public class PDFCreator {
                 contentStream.setFont(helveticaBoldFont, 12);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(50, customPageSize.getHeight() - 50);
-                contentStream.showText("Escuela: " + planEstudios.getEscArea().getName());
+                contentStream.showText("Escuela /o Área: " + planEstudios.getEscArea().getName());
                 contentStream.endText();
 
                 contentStream.beginText();
@@ -84,7 +84,7 @@ public class PDFCreator {
                             contentStream.newLineAtOffset(70, y);
 
                             // Escribir el curso
-                            contentStream.showText(curso.getName() + ":" + curso.getCode());
+                            contentStream.showText(curso.getName() + ":" + curso.getEscArea().getCode()+curso.getCode());
 
                             // Escribir los requisitos
                             contentStream.newLineAtOffset(200, 0);
@@ -96,7 +96,7 @@ public class PDFCreator {
                             // Escribir los correquisitos
                             contentStream.newLineAtOffset(200, 0);
                             String correquisitos = curso.getCorrequisitos().stream()
-                                    .map(c -> c.getName() + ":" + c.getCode())
+                                    .map(c -> c.getName() + ":" + c.getEscArea().getCode()+c.getCode())
                                     .reduce((c1, c2) -> c1 + " " + c2).orElse("");
                             contentStream.showText(correquisitos);
 
