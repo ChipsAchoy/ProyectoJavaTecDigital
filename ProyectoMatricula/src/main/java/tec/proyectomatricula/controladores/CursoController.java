@@ -15,24 +15,44 @@ import tec.proyectomatricula.modelos.Curso;
 public class CursoController {
     private List<Curso> cursos;
     
-
+    /**
+     *
+     */
     public CursoController() {
         this.cursos = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param curso
+     */
     public void addCurso(Curso curso) {
         cursos.add(curso);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Curso> getCursos() {
         return cursos;
     }
     
+    /**
+     *
+     * @param i
+     * @return
+     */
     public Curso getCursoByI(int i){
         
         return cursos.get(i);
     }
     
+    /**
+     *
+     * @param escuela
+     * @return
+     */
     public List<Curso> getCursosByEscuela(String escuela){
         List<Curso> cursosEscuela = new ArrayList<>();
         for(Curso curso : cursos){

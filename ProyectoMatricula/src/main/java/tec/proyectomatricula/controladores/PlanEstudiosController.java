@@ -15,18 +15,34 @@ import tec.proyectomatricula.modelos.PlanEstudios;
 public class PlanEstudiosController {
     private List<PlanEstudios> planEstudios;
     
-
+    /**
+     *
+     */
     public PlanEstudiosController() {
         this.planEstudios = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param planEstudio
+     */
     public void addPlanEstudio(PlanEstudios planEstudio) {
         planEstudios.add(planEstudio);
     }   
 
+    /**
+     *
+     * @return
+     */
     public List<PlanEstudios> getPlanEstudios() {
         return planEstudios;
     }
+
+    /**
+     *
+     * @param i
+     * @return
+     */
     public PlanEstudios getPlanByI(int i){
         
         return planEstudios.get(i);

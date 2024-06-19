@@ -15,19 +15,34 @@ import tec.proyectomatricula.modelos.EscuelaArea;
 public class EscuelaAreaController {
     private List<EscuelaArea> escuelasAreas;
     
-
+    /**
+     *
+     */
     public EscuelaAreaController() {
         this.escuelasAreas = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param escArea
+     */
     public void addEscuelaArea(EscuelaArea escArea) {
         escuelasAreas.add(escArea);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<EscuelaArea> getEscuelasArea() {
         return escuelasAreas;
     }
     
+    /**
+     *
+     * @param i
+     * @return
+     */
     public EscuelaArea getCursoByI(int i){
         
         return escuelasAreas.get(i);

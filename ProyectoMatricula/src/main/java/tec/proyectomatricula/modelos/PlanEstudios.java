@@ -23,6 +23,13 @@ public class PlanEstudios {
     private Map<String, List<Curso>> bloqueCursos;
 
     // Constructor
+
+    /**
+     *
+     * @param escArea
+     * @param code
+     * @param dateValid
+     */
     public PlanEstudios(EscuelaArea escArea, int code, String dateValid) {
         this.escArea = escArea;
         this.code = code;
@@ -33,53 +40,104 @@ public class PlanEstudios {
     }
 
     // Getters and Setters
+
+    /**
+     *
+     * @return
+     */
     public EscuelaArea getEscArea() {
         return escArea;
     }
 
+    /**
+     *
+     * @param escArea
+     */
     public void setEscArea(EscuelaArea escArea) {
         this.escArea = escArea;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCode() {
         return code;
     }
 
+    /**
+     *
+     * @param code
+     */
     public void setCode(int code) {
         this.code = code;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDateValid() {
         return dateValid;
     }
 
+    /**
+     *
+     * @param dateValid
+     */
     public void setDateValid(String dateValid) {
         this.dateValid = dateValid;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Curso> getCursos() {
         return cursos;
     }
 
+    /**
+     *
+     * @param curso
+     */
     public void addCurso(Curso curso) {
         this.cursos.add(curso);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getBloques() {
         return bloques;
     }
 
+    /**
+     *
+     * @param bloque
+     */
     public void addBloque(String bloque) {
         this.bloques.add(bloque);
         this.bloqueCursos.put(bloque, new ArrayList<>());
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<String, List<Curso>> getBloqueCursos() {
         return bloqueCursos;
     }
     
 
     // Asociar un curso a un bloque
+
+    /**
+     *
+     * @param curso
+     * @param bloque
+     */
     public void asociarCursoABloque(Curso curso, String bloque) {
         if (!this.bloques.contains(bloque)) {
             throw new IllegalArgumentException("El bloque no existe.");

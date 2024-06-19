@@ -13,11 +13,20 @@ import java.util.logging.Logger;
 import tec.proyectomatricula.modelos.Curso;
 import tec.proyectomatricula.modelos.PlanEstudios;
 
+/**
+ *
+ * @author INTEL
+ */
 public class PDFCreator {
 
     private String HELVETICA_path = "Fonts/Helvetica-Bold.ttf";
     private String HELVETICA_BOLD_path = "Fonts/Helvetica-Bold.ttf";
 
+    /**
+     *
+     * @param dest
+     * @param planEstudios
+     */
     public void createPDF(String dest, PlanEstudios planEstudios) {
 
         try (PDDocument document = new PDDocument()) {

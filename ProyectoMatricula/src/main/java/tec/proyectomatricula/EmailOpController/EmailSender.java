@@ -12,8 +12,18 @@ import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author INTEL
+ */
 public class EmailSender {
 
+    /**
+     *
+     * @param emailString
+     * @param contentString
+     * @param pdfFile
+     */
     public void emailSend(String emailString, String contentString, File pdfFile) {
 
         String apiKey = "317a7b4b8ae14a4ec5f024ac33620e17";
